@@ -1,35 +1,44 @@
 Create a very simple thesaurus db.
 --------------------------------------
+I need a database only, no scripts, programs, nothing at all but a single file JSONL output.
 
 1)
 Input:
 The lowercase lemma words: from word-list.raw
 
 2)
-I need a jsonl file output (each line is json format, "\n" separated).
-It contains ALL "lowercase lemma"-s defined in word-list.raw.
+The output db:
+It contains ALL "lowercase lemma" thesaurus entries defined in word-list.raw.
 It provides HIGH QUALITY thesaurus data for each one.
-It has 3 level object. first:"lowercase lemma"-s, in a "lowercase lemma", 
-second: case-sensitive "spelling" items, within "spelling", third: part of speech items ("pos lemma").
+It has 3 level object:
+i)first:"lowercase lemma"-s, 
+ii)in a "lowercase lemma", second: case-sensitive "spelling" items, 
+iii)within "spelling", third: part of speech items ("pos lemma").
 
 I need the most appropriate English meaning for each "pos lemma". (in "description" property):
 I need a short description for each "pos lemma", which is concise, understandable, best defining the meaning.
 I need the most frequent, most trivial meaning for each "pos lemma". If a "pos lemma" has multiple meanings,
 I need the most frequently used English meaning for that "pos lemma".
 I will use it for crossword clues, so a description should not be too long. 
-If different parts of speech exist (in English language) for the same "spelling", I need more entries within. 
+If different parts of speech exist (in English language) for the same "spelling", I need multiple entries within,
+one for each pos(part of speech). 
 
 In addition, I need a "frequency" value that describes the frequency of a given sense ("pos lemma") 
-within the English language. So how frequent the meaning occurs in a huge english general conversation, news,
-wikipedia, etc texts db (your AI internal db). I do not need the raw frequency data of the "lowercase lemma" only.
-Rather a meaningful measure of how "hard" to learn that specific sense("pos lemma") is. Please generate 
-such frequency values that every frequency value is unique (usable as a primary key) across "pos lemma" for the 
-entire database.
+within the English language, numerically. So how frequent the meaning occurs in a huge english general conversation, news,
+wikipedia, etc texts db (or in your AI internal db). I do not need the raw frequency data of the "lowercase lemma" only.
+Rather a meaningful measure of how "hard" to understand or learn that specific sense("pos lemma"), how much tricky it is. 
+Please generate such frequency values that every frequency value is unique (usable as a primary key) 
+across "pos lemma" for the entire database.
 
-Please fill hypernym, hyponyms and antonyms properties as more general, more specific and opposite meanings.
+Please fill "hypernym", "hyponyms" and "antonyms" properties as more general, more specific and opposite meanings.
+Add an example sentence in "example" property.
 
 3)
+Output format:
 I need a single file jsonl output. Each line is a "lowercase lemma" item tree.
+It is a jsonl file output. Each line is of json format, no "\n" within json format. 
+"\n" used for separating the LowerCaseLemma-s, so a preprocessor can create an index file
+for that easily, for access every single LowerCaseLemma randomly.
 
 Output line:
 Properties of "lowercase lemma" (LowerCaseLemma): 
@@ -50,12 +59,13 @@ Properties of "pos lemma" (PosLemma):
 "hypernym":string, <another lemma spelling key>
 "hyponyms":string[], [<another lemma spelling key>,<another lemma spelling key>,...]
 "antonyms":string[], [<another lemma spelling key>,<another lemma spelling key>,...]
+"example":string, <text>
 
 
 Output format single file example:
 
-{"key":"march", "spellings": {"March": [{"pos":"noun", "definition":"the third month of the year","hypernym":"month"}],"march": [{"pos":"verb", "definition":"etc...."}]}
-{"key":"cut", "spellings": {"cut": [{"pos":"noun", "definition":"..."}, {"pos":"verb", "definition":"..."}]}
+{"key":"march", "spellings": {"March": [{"pos":"noun", "definition":"the third month of the year","hypernym":"month",...}],"march": [{"pos":"verb", "definition":"etc....",...}]}
+{"key":"cut", "spellings": {"cut": [{"pos":"noun", "definition":"...",...}, {"pos":"verb", "definition":"...",...}]}
 {"key":"..."...}
 ...
 

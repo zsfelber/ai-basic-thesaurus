@@ -51,6 +51,14 @@ Please fill "hypernym", "hyponyms" and "antonyms" properties as more general, mo
 Add an example sentence in "example" property (omit trivial examples like ones generated from description : If no unique 
 and interesting example, better omit that).
 
+Generate these relation fields in a separate second pass after the relevant sense
+keys exist. During first-pass chunk generation, relation fields may be empty or
+provisional; do not block a chunk because a related lemma or sense has not yet
+been generated. In the final reconciliation pass, check each nonempty relation
+against the complete set of case-sensitive pos lemma keys, correct its part of
+speech and index, and remove unsupported or unresolved links. Do not treat the
+mere presence of a lemma spelling as proof that a matching sense key exists.
+
 3)
 Output format:
 I need a single file jsonl output. Each line is a "lowercase lemma" item tree.
@@ -126,3 +134,5 @@ letter has fewer than 1,000 lemmas; for this input, use `jk`, `qr`, and `wxyz`.
 Smaller working batches may be generated incrementally, but they are not final
 buckets: continue adding to the current bucket and do not start a later bucket
 until the current one is complete. Resume from the first lemma not yet included.
+After all buckets are complete, reconcile hypernyms, hyponyms, and antonyms in a
+separate pass across the complete database.

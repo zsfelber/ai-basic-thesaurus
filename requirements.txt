@@ -1,0 +1,99 @@
+Create a very simple thesaurus db.
+--------------------------------------
+I need a database only, no scripts, programs, nothing at all but a single file JSONL output.
+
+1)
+Input:
+The lowercase lemma words: from lemmas.txt
+
+2)
+The output db:
+It contains ALL "lowercase lemma" thesaurus entries defined in lemmas.txt.
+It provides HIGH QUALITY puzzle clue/thesaurus data for each one.
+Do not use 3rd party database/free/nonfree/external database for input, but your pure/direct AI language skills.
+Do not generate a junk based on wordnet db.
+
+It has 2 level object:
+i)first:"lowercase lemma"-s, 
+a lowercase lemma item is a word collection grouping the words of the same lowecase form
+
+ii)within "lowercase lemma", second: case-sensitive meaning items ("case sensitive pos lemma").
+case sensitive pos lemma is a definite meaning with a single "part of speech"
+
+
+I need the most appropriate English meaning for each "case sensitive pos lemma". (in "description" property):
+I need a short description for each "case sensitive pos lemma", which is concise, understandable, best defining the meaning.
+I need the most frequent, most trivial meaning for each "case sensitive pos lemma". If a "case sensitive pos lemma" has multiple meanings,
+I need the most frequently used English meaning for that "case sensitive pos lemma".
+I will use it for crossword clues, so a description should not be too long. 
+If different parts of speech exist (in English language) for the same spelling(case sensitive word), 
+and diffrent meanings for same spelling + part of speech, enumerate them into multiple 
+case sensitive pos lemmas according to definition. 
+Within a p.o.s group  lowercase lemma --(1:n<=4)--> (case sensitive p.o.s) --(1:n<=10)--> case sensitive pos lemma
+maximum number of case sensitive pos lemmas: 10 within (case sensitive p.o.s) group.
+
+However, prefer only define 1, at least not too many case sensitive pos lemma per p.o.s (whithin lowercase lemma item):
+Only add significant meaning.
+Only use multiple meanings within same p.o.s (within a lowercase lemma) if meaning1 and meaning2 
+are significantly different, otherwise merge meaning1 and meaning2 (still keep description short).
+Omit (already merged or not) meaningN,... if the total significance of original contained meanings is too low.
+If p.o.s. of meaningX1 and meaningX2 are different than "pos code" as part of primary key 
+differentiates them trivially.
+If even lowercase forms are different, items are grouped into another "lowecase lemmas" trivially.
+
+In addition, I need a "frequency" value that describes the frequency of a given sense ("case sensitive pos lemma") 
+within the English language, numerically. So how frequent the meaning occurs in a huge english general conversation, news,
+wikipedia, etc texts db (or in your AI internal db). I do not need the raw frequency data of the "lowercase lemma" only.
+Rather a meaningful measure of how "hard" to understand or learn that specific sense("case sensitive pos lemma"), how much tricky it is. 
+Please generate such frequency values so that every frequency value is unique across "case sensitive pos lemma" for the entire database.
+
+Please fill "hypernym", "hyponyms" and "antonyms" properties as more general, more specific and opposite meanings.
+Add an example sentence in "example" property (omit trivial examples like ones generated from description : If no unique 
+and interesting example, better omit that).
+
+3)
+Output format:
+I need a single file jsonl output. Each line is a "lowercase lemma" item tree.
+It is a jsonl file output. Each line is of json format, no "\n" within json format. 
+"\n" used for separating the LowerCaseLemma-s, so a preprocessor can create an index file
+for that easily, for access every single LowerCaseLemma randomly.
+
+Output line:
+Properties of "lowercase lemma" (LowerCaseLemma): 
+"key":string, case insensitive (lowercase) word (unique in db)
+"meanings":CaseSensitivePosLemma[]
+
+Properties of "case sensitive pos lemma" (CaseSensitivePosLemma): 
+"key":string, <see above>  (unique in db)
+    see format below
+"definition":string, <see above>
+"frequency":integer, <see above>  (unique in db)
+"synonyms":string[], [<another lemma spelling key>,<another lemma spelling key>,...]
+"hypernym":string, <another lemma spelling key>
+"hyponyms":string[], [<another lemma spelling key>,<another lemma spelling key>,...]
+"antonyms":string[], [<another lemma spelling key>,<another lemma spelling key>,...]
+"example":string, <text>
+(word case sensitive spelling is always a variant of parent "key", no difference allowed (/line/key)==lowercase(/line/spellings[..]/key) )
+
+"key": primary key based on case sensitive word
+format: [char1][char2]rest
+  char1: pos code n|v|e|j (as noun,verb,adverb,adjective)
+  char2: index (0..9) uniq index to differentiate same-case sensitive-form+same-pos words
+         (so there can be max 10 items)
+  the rest..: case sensitive word
+  Examples: "n0March", "v0march", "v1march"
+
+
+Output format single file example:
+
+{"key":"march", "spellings": {"March": [{"pos":"noun", "definition":"the third month of the year","hypernym":"month",...}],"march": [{"pos":"verb", "definition":"etc....",...}]}
+{"key":"cut", "spellings": {"cut": [{"pos":"noun", "definition":"...",...}, {"pos":"verb", "definition":"...",...}]}
+{"key":"..."...}
+...
+
+4)
+Please generate a flawless database; do not provide a rushed, truncated version—as AI models 
+often do when faced with a long list of definitions—since I need every single entry. I am 
+looking for high-quality, meticulous work.
+Omit trivial fillouts like examples generated from description or similar poor quality 
+alibi solutions.

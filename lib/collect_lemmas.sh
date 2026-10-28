@@ -9,6 +9,7 @@ INPUT_FILES="multiword_lemmas_j.csv multiword_lemmas_k.csv multiword_lemmas_l.cs
 set -euo pipefail
 
 TARGET_FILE="../lemmas.txt"
+TARGET_FILE_0="../lemmas0.txt"
 
 # Default fallback if INPUT_FILES is unset or empty
 : "${INPUT_FILES:=multiword_lemmas_j.csv multiword_lemmas_k.csv}"
@@ -18,8 +19,8 @@ TMP_FILE="$(mktemp)"
 trap 'rm -f "$TMP_FILE"' EXIT
 
 # Append existing lemmas from target file if present
-if [[ -f "$TARGET_FILE" ]]; then
-  cat "$TARGET_FILE" >> "$TMP_FILE"
+if [[ -f "$TARGET_FILE_0" ]]; then
+  cat "$TARGET_FILE_0" >> "$TMP_FILE"
 fi
 
 # Loop over the files listed in $INPUT_FILES
@@ -32,9 +33,27 @@ for file in $INPUT_FILES; do
 done
 
 # Ensure parent directory exists for target file
-mkdir -p "$(dirname "$TARGET_FILE")"
+mkdir -p "$(dirname "$TARGET_FILE_0")"
 
 # Filter empty lines, sort alphabetically, and eliminate duplicate lines (sort -u / uniq)
-grep -v '^\s*$' "$TMP_FILE" | sort | uniq > "$TARGET_FILE"
+grep -v '^\s*$' "$TMP_FILE" | sort | uniq > "$TARGET_FILE_0"
 
-echo "Updated, deduplicated, and sorted $TARGET_FILE successfully."
+# ... your existing collection code that generates/outputs lemmas ... | \
+cat "$TARGET_FILE_0" | python3 -c '
+import sys, unicodedata
+
+lemmas = set()
+for line in sys.stdin:
+    # Normalize NFKC (converts non-breaking spaces & unicode hyphens to standard ASCII)
+    normalized = unicodedata.normalize("NFKC", line).strip()
+    if normalized:
+        lemmas.add(normalized)
+
+for lemma in sorted(lemmas):
+    print(lemma)
+' > "$TARGET_FILE"
+
+rm $TARGET_FILE_0
+
+
+echo "Updated, deduplicated, and sorted $TARGET_FILE_0 successfully."

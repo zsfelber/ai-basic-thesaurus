@@ -4,24 +4,20 @@ INPUT_FILES="multiword_lemmas_j.csv multiword_lemmas_k.csv multiword_lemmas_l.cs
 
 # collect_lemmas.sh
 # Reads file names from $INPUT_FILES variable,
-# appends all lines into ../lemmas.txt, and keeps lines uniquely sorted.
+# appends all lines into ../lemmas.txt, removes duplicates, and keeps lines sorted.
 
 set -euo pipefail
 
 TARGET_FILE="../lemmas.txt"
 
-
 # Default fallback if INPUT_FILES is unset or empty
-#: "${INPUT_FILES:=multiword_lemmas_j.csv multiword_lemmas_k.csv}"
-
+: "${INPUT_FILES:=multiword_lemmas_j.csv multiword_lemmas_k.csv}"
 
 # Create a temporary working file
-
 TMP_FILE="$(mktemp)"
 trap 'rm -f "$TMP_FILE"' EXIT
 
 # Append existing lemmas from target file if present
-
 if [[ -f "$TARGET_FILE" ]]; then
   cat "$TARGET_FILE" >> "$TMP_FILE"
 fi
@@ -38,7 +34,7 @@ done
 # Ensure parent directory exists for target file
 mkdir -p "$(dirname "$TARGET_FILE")"
 
-# Remove blank lines and sort uniquely into target file
-grep -v '^\s*$' "$TMP_FILE" | sort -u > "$TARGET_FILE"
+# Filter empty lines, sort alphabetically, and eliminate duplicate lines (sort -u / uniq)
+grep -v '^\s*$' "$TMP_FILE" | sort | uniq > "$TARGET_FILE"
 
-echo "Updated and sorted $TARGET_FILE successfully."
+echo "Updated, deduplicated, and sorted $TARGET_FILE successfully."

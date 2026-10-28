@@ -1,4 +1,3 @@
-African American
 a
 a-bomb
 a-horizon
@@ -1623,6 +1622,7 @@ afrasian
 afresh
 africa
 african
+african american
 african violet
 african-american
 africander
@@ -3993,7 +3993,6 @@ anthurium
 anthus
 anthyllis
 anti
-anti-Semitism
 anti-aestheticism
 anti-aircraft
 anti-american
@@ -8193,7 +8192,7 @@ befogged
 befool
 befooling
 before
-before Christ
+before christ
 before long
 beforehand
 befoul
@@ -9373,7 +9372,7 @@ black-and-tan
 black-and-white
 black-barred
 black-coated
-black-eyed Susan
+black-eyed susan
 black-gray
 black-grey
 black-haired
@@ -12625,7 +12624,7 @@ callas
 callathump
 callback
 caller
-caller ID
+caller id
 caller-out
 caller-up
 calliandra
@@ -48868,9 +48867,9 @@ lazio
 lazuli
 lazuline
 lazy
-lazy Susan
 lazy boy
 lazy river
+lazy susan
 lazybones
 lb
 lbj
@@ -52511,11 +52510,11 @@ mammy
 mamo
 mamoncillo
 man
-man Friday
 man about
 man ate
 man cave
 man eater
+man friday
 man handle
 man hole
 man hour
@@ -63399,9 +63398,9 @@ pallone
 pallor
 pally
 palm
-palm Sunday
 palm oil
 palm reader
+palm sunday
 palm tree
 palm-shaped
 palmaceae
@@ -64488,7 +64487,6 @@ paxil
 paxto
 paxton
 pay
-pay TV
 pay back
 pay check
 pay day
@@ -64500,6 +64498,7 @@ pay packet
 pay phone
 pay rise
 pay roll
+pay tv
 pay-as-you-go plan
 pay-phone
 pay-station
@@ -66934,8 +66933,8 @@ plaice
 plaid
 plaid pattern
 plain
-plain English
 plain clothes
+plain english
 plain sailing
 plain text
 plain truth
@@ -67036,9 +67035,9 @@ plaquenil
 plash
 plasm
 plasma
-plasma TV
 plasma display
 plasma membrane
+plasma tv
 plasmablast
 plasmacyte
 plasmacytoma
@@ -72000,7 +71999,7 @@ ramayana
 ramble
 rambler
 rambling
-rambling Rose
+rambling rose
 ramblingly
 rambotan
 rambouillet
@@ -74437,10 +74436,10 @@ reverie
 revers
 reversal
 reverse
-reverse Osmosis
-reverse Polish
 reverse charge
 reverse gear
+reverse osmosis
+reverse polish
 reversed
 reversely
 reversibility
@@ -74744,7 +74743,7 @@ ribonuclease
 ribonucleinase
 ribose
 ribosome
-ribosome RNA
+ribosome rna
 ribwort
 ricardo
 rice
@@ -86644,7 +86643,6 @@ suaveness
 suavity
 sub
 sub assembly
-sub-Saharan region
 sub-assembly
 sub-assembly line
 sub-contractor worker
@@ -86656,6 +86654,7 @@ sub-plot storyline
 sub-rosa
 sub-routine code
 sub-saharan
+sub-saharan region
 sub-sea cable
 sub-soil layer
 sub-station grid
@@ -86802,7 +86801,7 @@ submit a
 submitter
 submucosa
 subnormal
-subnormal IQ
+subnormal iq
 subnormality
 subocean
 suboceanic
@@ -88650,8 +88649,8 @@ tablespoon
 tablespoon measure
 tablespoonful
 tablet
-tablet PC
 tablet computer
+tablet pc
 tablet screen
 tabletop
 tableware
@@ -90998,8 +90997,8 @@ threatened species
 threatening
 threateningly
 three
-three D
-three R
+three d
+three r
 three score
 three-bagger
 three-cornered
@@ -100622,10 +100621,10 @@ wesleyanism
 wesleyism
 wessex
 west
-west Germany
 west africa
 west bank
 west end
+west germany
 west indies
 west point
 west pole
@@ -100906,7 +100905,6 @@ whistling wind
 whit
 whit-tuesday
 white
-white Russian
 white alert
 white ants
 white bear
@@ -100935,6 +100933,7 @@ white pine
 white poison
 white rhino
 white room
+white russian
 white sale
 white sauce
 white spirit
@@ -101001,7 +101000,7 @@ whitman
 whitmonday
 whitney
 whitsun
-whitsun Monday
+whitsun monday
 whitsunday
 whitsuntide
 whittier
@@ -103175,7 +103174,6 @@ zona
 zonal
 zonary
 zone
-zone Defense
 zone defense
 zone in
 zone out

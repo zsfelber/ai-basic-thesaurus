@@ -36,7 +36,7 @@ done
 mkdir -p "$(dirname "$TARGET_FILE_0")"
 
 # Filter empty lines, sort alphabetically, and eliminate duplicate lines (sort -u / uniq)
-grep -v '^\s*$' "$TMP_FILE" | sort | uniq > "$TARGET_FILE_0"
+grep -v '^\s*$' "$TMP_FILE" | tr '[:upper:]' '[:lower:]' | sort | uniq > "$TARGET_FILE_0"
 
 # ... your existing collection code that generates/outputs lemmas ... | \
 cat "$TARGET_FILE_0" | python3 -c '

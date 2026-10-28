@@ -98,3 +98,11 @@ often do when faced with a long list of definitions—since I need every single 
 looking for high-quality, meticulous work.
 Omit trivial fillouts like examples generated from description or similar poor quality 
 alibi solutions.
+
+
+5)
+Incremental generation.
+If output is too big, sort the result to a global alphabetical order,
+and split output to each file containing words of the same initial letters or split more deeply, 
+grouped by first 2 letters initially. Choose the practical way of that.
+Then continue generation in each step as it abandoned last time.

@@ -26,9 +26,9 @@ I need a short description for each "case sensitive pos lemma", which is concise
 I need the most frequent, most trivial meaning for each "case sensitive pos lemma". If a "case sensitive pos lemma" has multiple meanings,
 I need the most frequently used English meaning for that "case sensitive pos lemma".
 I will use it for crossword clues, so a description should not be too long. 
-If different parts of speech exist (in English language) for the same spelling(case sensitive word), 
-and diffrent meanings for same spelling + part of speech, enumerate them into multiple 
-case sensitive pos lemmas according to definition. 
+If different parts of speech exist (in English language) for the same lowercase lemma item,
+same spelling (case sensitive word) within, and diffrent meanings for same spelling + part of speech, 
+enumerate them into multiple case sensitive pos lemmas according to 'key' definition. 
 Within a p.o.s group  lowercase lemma --(1:n<=4)--> (case sensitive p.o.s) --(1:n<=10)--> case sensitive pos lemma
 maximum number of case sensitive pos lemmas: 10 within (case sensitive p.o.s) group.
 
@@ -68,17 +68,18 @@ Properties of "case sensitive pos lemma" (CaseSensitivePosLemma):
     see format below
 "definition":string, <see above>
 "frequency":integer, <see above>  (unique in db)
-"synonyms":string[], [<another lemma spelling key>,<another lemma spelling key>,...]
-"hypernym":string, <another lemma spelling key>
-"hyponyms":string[], [<another lemma spelling key>,<another lemma spelling key>,...]
-"antonyms":string[], [<another lemma spelling key>,<another lemma spelling key>,...]
+"synonyms":string[], [<another case-sensitive pos lemma key>,<another case-sensitive pos lemma key>,...]
+"hypernym":string, <another case-sensitive pos lemma key>
+"hyponyms":string[], [<another case-sensitive pos lemma key>,<another case-sensitive pos lemma key>,...]
+"antonyms":string[], [<another case-sensitive pos lemma key>,<another case-sensitive pos lemma key>,...]
 "example":string, <text>
-(word case sensitive spelling is always a variant of parent "key", no difference allowed (/line/key)==lowercase(/line/spellings[..]/key) )
+(word case sensitive spelling as part of case sensitive pos lemma key,
+is always a variant of parent (LowerCaseLemma) "key", no difference allowed (/line/key)==lowercase(/line/meanings[..]:key.substr(2)) )
 
 "key": primary key based on case sensitive word
 format: [char1][char2]rest
   char1: pos code n|v|e|j (as noun,verb,adverb,adjective)
-  char2: index (0..9) uniq index to differentiate same-case sensitive-form+same-pos words
+  char2: index (0..9) unique index to differentiate same-case sensitive-form+same-pos words
          (so there can be max 10 items)
   the rest..: case sensitive word
   Examples: "n0March", "v0march", "v1march"
@@ -86,8 +87,8 @@ format: [char1][char2]rest
 
 Output format single file example:
 
-{"key":"march", "spellings": {"March": [{"pos":"noun", "definition":"the third month of the year","hypernym":"month",...}],"march": [{"pos":"verb", "definition":"etc....",...}]}
-{"key":"cut", "spellings": {"cut": [{"pos":"noun", "definition":"...",...}, {"pos":"verb", "definition":"...",...}]}
+{"key":"march", "meanings": [{"key":"n0March", "definition":"the third month of the year","hypernym":"month",...},{"key":"v0march", "definition":"etc....",...}]}
+{"key":"cut", "meanings": [{"key":"n0cut", "definition":"...",...}, {"key":"v0cut", "definition":"...",...}]}
 {"key":"..."...}
 ...
 

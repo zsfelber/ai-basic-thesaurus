@@ -56,8 +56,14 @@ keys exist. During first-pass chunk generation, relation fields may be empty or
 provisional; do not block a chunk because a related lemma or sense has not yet
 been generated. In the final reconciliation pass, check each nonempty relation
 against the complete set of case-sensitive pos lemma keys, correct its part of
-speech and index, and remove unsupported or unresolved links. Do not treat the
-mere presence of a lemma spelling as proof that a matching sense key exists.
+speech and index, and preserve supported links whose target entry is not yet
+present. Queue each missing target lemma or sense, then add it as a supplemental
+entry using the same schema and POS-key format in a later alphabetical chunk.
+Supplemental entries may add spellings beyond lemmas.txt; they must not replace
+or omit any input lemma. Remove a relation only when it is determined to be
+incorrect, not merely because its target has not been generated yet. The final
+pass must ensure that every nonempty relation resolves to an existing sense key
+and that all input and supplemental sense frequencies remain globally unique.
 
 3)
 Output format:
@@ -134,5 +140,7 @@ letter has fewer than 1,000 lemmas; for this input, use `jk`, `qr`, and `wxyz`.
 Smaller working batches may be generated incrementally, but they are not final
 buckets: continue adding to the current bucket and do not start a later bucket
 until the current one is complete. Resume from the first lemma not yet included.
-After all buckets are complete, reconcile hypernyms, hyponyms, and antonyms in a
-separate pass across the complete database.
+After all input buckets are complete, reconcile hypernyms, hyponyms, and
+antonyms across the complete database. Add any supported missing target senses
+in supplemental alphabetical chunks, then rerun the global relation and
+frequency checks.

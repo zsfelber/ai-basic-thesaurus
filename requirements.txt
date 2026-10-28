@@ -78,7 +78,24 @@ is always a variant of parent (LowerCaseLemma) "key", no difference allowed (/li
 
 "key": primary key based on case sensitive word
 format: [char1][char2]rest
-  char1: pos code n|v|e|j (as noun,verb,adverb,adjective)
+  char1: one-character part-of-speech code from this stable table:
+    n = noun (including proper nouns and abbreviations used as nouns)
+    v = verb
+    j = adjective
+    e = adverb
+    r = pronoun
+    d = determiner
+    t = article
+    p = preposition or adposition
+    c = conjunction
+    i = interjection
+    m = numeral
+    q = particle
+    x = auxiliary verb
+  Keep these codes unchanged in all output files. Use the closest grammatical
+  category above for other lexical forms, assigning a new unused lowercase
+  letter only when none applies and documenting it here first. Every input
+  lemma must have at least one meaning; do not emit an empty meanings array.
   char2: index (0..9) unique index to differentiate same-case sensitive-form+same-pos words
          (so there can be max 10 items)
   the rest..: case sensitive word
@@ -102,7 +119,10 @@ alibi solutions.
 
 5)
 Incremental generation.
-If output is too big, sort the result to a global alphabetical order,
-and split output to each file containing words of the same initial letters or split more deeply, 
-grouped by first 2 letters initially. Choose the practical way of that.
-Then continue generation in each step as it abandoned last time.
+Sort all results in global alphabetical order. Each final JSONL bucket file
+must contain at least 1,000 distinct input lemmas. Use one initial letter per
+bucket by default. Merge adjacent initial letters in alphabetical order when a
+letter has fewer than 1,000 lemmas; for this input, use `jk`, `qr`, and `wxyz`.
+Smaller working batches may be generated incrementally, but they are not final
+buckets: continue adding to the current bucket and do not start a later bucket
+until the current one is complete. Resume from the first lemma not yet included.

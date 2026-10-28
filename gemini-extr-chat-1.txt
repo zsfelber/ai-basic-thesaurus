@@ -12,4 +12,3 @@ I think this does not mean to be a too big list. If it exceeds the chat window l
 well definied alphabetical position from which we can move on to the next dose once we finished.
 That's why alphabetical sorting is important.
 
->>multiword-lemmas.txt

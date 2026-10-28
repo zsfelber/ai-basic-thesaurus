@@ -1,0 +1,14 @@
+I already uploaded word-list.raw. I want you to create all possible multiword lemmas from  single words of word-list.raw.
+A multiword lemma consists of words, hyphens and spaces. All letters are lower-case regardless of correct English spelling.
+It should cover all frequent regular English terms, like "<verb> off" "<verb> about"- like combinations, everything not
+exceeding a resonable limit of a so big general purpose database (which has these slightly below 100k lemmas of word list). 
+So a resonable, not too verbose, not too small extension based on word combining. 
+I need no meanings, definitions, relations but the pure multiword items list. 
+Please generare a comma-separated list of multiword lemmas starting with 'x', sorted alphabetically. 
+The second (third, .. etc if presents) word tag can start with any letter, only the first word tag initial is
+limited to letters 'x' 'y' 'z'.
+
+I think this does not mean to be a too big list. Generate downloadable .CSV output file(s).
+If it exceeds the chat window limits, please stop and wait to my next interaction to continue.
+That's why alphabetical sorting is important.
+
